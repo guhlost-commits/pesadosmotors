@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PesadosMotors — Compre e venda caminhões no Brasil</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a;line-height:1.5;font-size:14px}
+a{text-decoration:none;color:inherit}
+button,input,select{font-family:inherit;outline:none;border:none;cursor:pointer}
+
+:root{
+  --red:    #CC1B1B;
+  --red-d:  #A81212;
+  --red-l:  #FFF0F0;
+  --red-m:  #E83030;
+  --navy:   #0D1B2A;
+  --navy2:  #162538;
+  --gray1:  #F5F6F8;
+  --gray2:  #E8EAED;
+  --gray3:  #C5C8CE;
+  --gray4:  #767E8C;
+  --gray5:  #3A4250;
+  --green:  #15803D;
+  --green-l:#DCFCE7;
+  --white:  #fff;
+  --shadow: 0 2px 12px rgba(0,0,0,.09);
+  --shadow-lg: 0 6px 28px rgba(0,0,0,.14);
+}
+
+/* ── TOPBAR ── */
+.topbar{
+  background:var(--navy);
+  height:33px;display:flex;align-items:center;padding:0 24px;
+}
+.tb-l{display:flex;align-items:center}
+.tb-l a{color:#7A8FA0;font-size:11.5px;font-weight:500;padding:0 11px;border-right:1px solid #1E2E3E;line-height:33px;transition:color .15s}
+.tb-l a:first-child{padding-left:0}
+.tb-l a:hover{color:#fff}
+.tb-r{margin-left:auto;display:flex;align-items:center}
+.tb-r a{color:#7A8FA0;font-size:11.5px;font-weight:500;padding:0 11px;border-left:1px solid #1E2E3E;line-height:33px;transition:color .15s}
+.tb-r a:hover{color:#fff}
+
+/* ── NAVBAR ── */
+.navbar{
+  position:sticky;top:0;z-index:999;
+  background:#fff;border-bottom:1px solid var(--gray2);
+  height:58px;display:flex;align-items:center;padding:0 24px;gap:12px;
+  box-shadow:0 1px 4px rgba(0,0,0,.07);
+}
+.logo{display:flex;align-items:baseline;flex-shrink:0;gap:0;line-height:1}
+.logo-p1{font-size:21px;font-weight:900;color:var(--navy);letter-spacing:-.8px}
+.logo-p2{font-size:21px;font-weight:900;color:var(--red);letter-spacing:-.8px}
+.logo-tag{font-size:8.5px;font-weight:700;color:var(--gray3);letter-spacing:.4px;margin-left:3px;align-self:flex-start;margin-top:2px;text-transform:uppercase}
+
+.nav-sb{
+  flex:1;max-width:440px;margin:0 12px;
+  display:flex;align-items:center;height:36px;
+  background:var(--gray1);border:1.5px solid var(--gray2);
+  border-radius:18px;padding:0 14px;gap:7px;transition:all .2s;
+}
+.nav-sb:focus-within{border-color:var(--red);background:#fff;box-shadow:0 0 0 3px rgba(204,27,27,.08)}
+.nav-sb input{flex:1;background:transparent;font-size:13px;color:var(--navy)}
+.nav-sb input::placeholder{color:var(--gray3)}
+.nav-sb-btn{background:var(--red);color:#fff;border-radius:14px;padding:3px 13px;font-size:11.5px;font-weight:700;flex-shrink:0;transition:background .15s}
+.nav-sb-btn:hover{background:var(--red-d)}
+
+.nav-links{display:flex;align-items:center;gap:0}
+.nav-links a{
+  font-size:13px;font-weight:500;color:var(--gray5);
+  padding:0 10px;height:58px;display:flex;align-items:center;
+  border-bottom:2.5px solid transparent;white-space:nowrap;
+  transition:color .15s,border-color .15s;
+}
+.nav-links a:hover,.nav-links a.act{color:var(--navy);border-bottom-color:var(--red)}
+
+.nav-acts{margin-left:auto;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.btn-sec{border:1.5px solid var(--red);color:var(--red);border-radius:6px;padding:7px 14px;font-size:13px;font-weight:700;background:#fff;transition:background .15s}
+.btn-sec:hover{background:var(--red-l)}
+.btn-pri{background:var(--red);color:#fff;border-radius:6px;padding:7px 16px;font-size:13px;font-weight:700;transition:background .15s}
+.btn-pri:hover{background:var(--red-d)}
+
+/* ── HERO ── */
+.hero{
+  background:var(--navy);
+  padding:34px 24px 50px;
+  position:relative;overflow:hidden;
+}
+/* Linhas diagonais decorativas de fundo */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:repeating-linear-gradient(
+    -55deg,
+    rgba(255,255,255,.015) 0px,
+    rgba(255,255,255,.015) 1px,
+    transparent 1px,
+    transparent 40px
+  );
+  pointer-events:none;
+}
+.hero-accent{
+  position:absolute;left:0;top:0;bottom:0;width:5px;
+  background:linear-gradient(to bottom,var(--red),var(--red-m));
+}
+.hero-glow{
+  position:absolute;right:-120px;top:-120px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(204,27,27,.14) 0%,transparent 68%);
+  pointer-events:none;
+}
+.hero-inner{max-width:860px;margin:0 auto;position:relative;z-index:1;padding-left:16px}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(204,27,27,.15);border:1px solid rgba(204,27,27,.3);
+  border-radius:20px;padding:4px 12px;
+  font-size:11px;font-weight:700;color:#FF9494;
+  text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;
+}
+.hero-title{
+  color:#fff;font-size:28px;font-weight:900;
+  margin-bottom:6px;letter-spacing:-.5px;line-height:1.15;
+}
+.hero-title .hl{color:var(--red-m)}
+.hero-sub{color:#7A8FA0;font-size:13px;margin-bottom:20px}
+.hero-sub b{color:#A8B8C8;font-weight:600}
+
+/* ── SEARCH BOX ── */
+.sbox{
+  background:#fff;border-radius:10px;
+  padding:18px 18px 14px;
+  box-shadow:0 8px 36px rgba(0,0,0,.28);
+}
+.stabs{display:flex;border-bottom:1.5px solid var(--gray2);margin-bottom:14px;gap:0}
+.stab{
+  padding:7px 15px 9px;font-size:12.5px;font-weight:600;
+  color:var(--gray4);background:transparent;border:none;
+  border-bottom:2.5px solid transparent;margin-bottom:-1.5px;
+  cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s;
+}
+.stab:hover{color:var(--navy)}.stab.act{color:var(--red);border-bottom-color:var(--red)}
+.srow{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr auto;gap:10px;align-items:end}
+.sf-lbl{font-size:10.5px;font-weight:700;color:var(--gray4);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px}
+.sf select,.sf input{
+  width:100%;height:40px;border:1.5px solid var(--gray2);
+  border-radius:7px;padding:0 10px;font-size:13px;color:var(--navy);
+  background:#fff;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23767E8C' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center;
+  transition:border-color .2s;
+}
+.sf select:focus,.sf input:focus{border-color:var(--red)}
+.sf input{background-image:none}
+.sf input::placeholder{color:var(--gray3)}
+.btn-search{
+  height:40px;background:var(--red);color:#fff;
+  border-radius:7px;padding:0 22px;font-size:14px;font-weight:700;
+  white-space:nowrap;display:flex;align-items:center;gap:6px;
+  transition:background .15s;flex-shrink:0;
+}
+.btn-search:hover{background:var(--red-d)}
+.se{margin-top:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.se-lbl{font-size:12px;color:var(--gray4)}
+.se-pill{
+  font-size:12px;font-weight:500;color:var(--gray5);
+  background:var(--gray1);border:1px solid var(--gray2);
+  border-radius:14px;padding:3px 10px;cursor:pointer;
+  transition:all .15s;
+}
+.se-pill:hover{border-color:var(--red);color:var(--red)}
+.se-avancada{font-size:12px;font-weight:600;color:var(--red);margin-left:auto}
+
+/* ── CATS ── */
+.cat-wrap{background:var(--gray1);border-bottom:1px solid var(--gray2)}
+.cat-inner{max-width:1180px;margin:0 auto;padding:0 24px}
+.cat-row{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none}
+.cat-row::-webkit-scrollbar{display:none}
+.cat-item{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:11px 15px;cursor:pointer;flex-shrink:0;
+  border-bottom:2.5px solid transparent;transition:border-color .2s;
+}
+.cat-item:hover,.cat-item.act{border-bottom-color:var(--red)}
+.cat-ico{
+  width:38px;height:38px;border-radius:50%;background:#fff;
+  border:1.5px solid var(--gray2);display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.cat-item:hover .cat-ico,.cat-item.act .cat-ico{border-color:var(--red);background:var(--red-l)}
+.cat-nm{font-size:11px;font-weight:600;color:var(--gray5);white-space:nowrap}
+.cat-qt{font-size:10px;color:var(--gray4)}
+
+/* ── WRAPPER ── */
+.wrap{max-width:1180px;margin:0 auto;padding:20px 24px}
+
+/* ── FEIRÃO ── */
+.feirao{
+  background:var(--navy);
+  border:1px solid rgba(204,27,27,.3);
+  border-left:4px solid var(--red);
+  border-radius:10px;padding:16px 22px;
+  display:flex;align-items:center;gap:18px;
+  margin-bottom:20px;position:relative;overflow:hidden;
+}
+.feirao::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;
+  width:35%;background:linear-gradient(90deg,transparent,rgba(204,27,27,.07));
+}
+.fei-tag{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--red);color:#fff;font-size:9.5px;font-weight:800;
+  padding:2px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:.3px;margin-bottom:5px;
+}
+.fei-title{color:#fff;font-size:17px;font-weight:800;margin-bottom:2px}
+.fei-title span{color:#FF7070}
+.fei-sub{color:#6A7A8A;font-size:12px}
+.fei-stats{display:flex;gap:22px;flex-shrink:0}
+.fs{text-align:center}
+.fs-n{font-size:19px;font-weight:800;color:#FF7070;display:block;line-height:1}
+.fs-l{font-size:10px;color:#6A7A8A;display:block;margin-top:2px}
+.fei-btn{
+  background:var(--red);color:#fff;border-radius:7px;
+  padding:9px 20px;font-size:13px;font-weight:700;flex-shrink:0;
+  transition:background .15s;
+}
+.fei-btn:hover{background:var(--red-d)}
+
+/* ── AVISO OLX MODE ── */
+.aviso-beta{
+  background:var(--gray1);border:1px solid var(--gray2);border-radius:8px;
+  padding:10px 16px;display:flex;align-items:center;gap:10px;margin-bottom:18px;
+}
+.aviso-beta p{font-size:12px;color:var(--gray5);line-height:1.5}
+.aviso-beta strong{color:var(--navy)}
+
+/* ── RESULTS LAYOUT ── */
+.res-wrap{display:grid;grid-template-columns:220px 1fr;gap:18px}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  background:#fff;border:1px solid var(--gray2);border-radius:10px;
+  height:fit-content;position:sticky;top:70px;overflow:hidden;
+}
+.sb-hd{
+  padding:13px 16px;border-bottom:1px solid var(--gray2);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.sb-hd h3{font-size:13px;font-weight:700;color:var(--navy)}
+.sb-clear{font-size:11.5px;color:var(--red);font-weight:600}
+.sb-sec{border-bottom:1px solid var(--gray2);padding:12px 16px}
+.sb-sec:last-child{border-bottom:none;padding-bottom:14px}
+.sb-ttl{font-size:10px;font-weight:700;color:var(--gray4);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.sb-sel{
+  width:100%;height:33px;border:1px solid var(--gray2);border-radius:6px;
+  padding:0 8px;font-size:12px;color:var(--navy);appearance:none;font-family:inherit;
+  background:#fff url("data:image/svg+xml,%3Csvg width='8' height='5' viewBox='0 0 8 5' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l3 3 3-3' stroke='%23767E8C' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 8px center;
+}
+.sb-range{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sb-range input{
+  height:32px;border:1px solid var(--gray2);border-radius:6px;
+  padding:0 7px;font-size:12px;color:var(--navy);width:100%;font-family:inherit;
+}
+.sb-chk{display:flex;align-items:center;gap:7px;margin-bottom:5px;cursor:pointer}
+.sb-chk input[type=checkbox]{accent-color:var(--red);width:13px;height:13px;cursor:pointer}
+.sb-chk label{font-size:12px;color:var(--gray5);cursor:pointer;flex:1}
+.sb-chk .ct{font-size:11px;color:var(--gray4)}
+.sb-chips{display:flex;gap:5px;flex-wrap:wrap}
+.sb-chip{
+  padding:3px 9px;border-radius:12px;font-size:11px;font-weight:600;
+  border:1px solid var(--gray2);background:#fff;color:var(--gray5);cursor:pointer;transition:all .15s;
+}
+.sb-chip.act,.sb-chip:hover{border-color:var(--red);background:var(--red-l);color:var(--red)}
+.sb-apply{
+  width:100%;background:var(--red);color:#fff;border-radius:6px;
+  padding:9px;font-size:13px;font-weight:700;text-align:center;cursor:pointer;
+  margin-top:12px;transition:background .15s;
+}
+.sb-apply:hover{background:var(--red-d)}
+.sb-mais{font-size:11.5px;color:var(--red);font-weight:600;margin-top:6px;display:block;cursor:pointer}
+
+/* ── RESULTS ── */
+.res-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+.res-cnt{font-size:14px;font-weight:700;color:var(--navy)}.res-cnt span{color:var(--red)}
+.res-sort{
+  height:33px;border:1px solid var(--gray2);border-radius:6px;
+  padding:0 8px;font-size:12px;color:var(--navy);appearance:none;font-family:inherit;cursor:pointer;
+  background:#fff url("data:image/svg+xml,%3Csvg width='8' height='5' viewBox='0 0 8 5' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l3 3 3-3' stroke='%23767E8C' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 7px center;
+  padding-right:22px;
+}
+.atags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.atag{
+  display:inline-flex;align-items:center;gap:3px;
+  background:var(--red-l);border:1px solid rgba(204,27,27,.2);
+  border-radius:12px;padding:3px 9px;font-size:11.5px;font-weight:600;color:var(--red);
+}
+.atag button{background:none;color:var(--red);font-size:12px;font-weight:700;cursor:pointer;border:none;line-height:1}
+.bc{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--gray4);margin-bottom:10px}
+.bc a{color:var(--gray4)}.bc a:hover{color:var(--red)}.bc-sep{color:var(--gray3)}
+
+/* ── AVISO FINANCIAMENTO ── */
+.fin-aviso{
+  background:var(--gray1);border:1px solid var(--gray2);border-radius:8px;
+  padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:12px;
+}
+.fin-aviso .fi{font-size:22px}
+.fin-aviso h4{font-size:13px;font-weight:700;color:var(--navy)}
+.fin-aviso p{font-size:11.5px;color:var(--gray4);margin-top:1px;line-height:1.5}
+.fin-aviso-btns{margin-left:auto;display:flex;flex-direction:column;gap:4px;flex-shrink:0}
+.fin-link{
+  display:flex;align-items:center;gap:5px;
+  background:#fff;border:1px solid var(--gray2);border-radius:6px;
+  padding:5px 10px;font-size:11px;font-weight:700;color:var(--gray5);
+  white-space:nowrap;transition:all .15s;
+}
+.fin-link:hover{border-color:var(--red);color:var(--red)}
+
+/* ── CARDS LISTA ── */
+.cards-list{display:flex;flex-direction:column;gap:10px}
+.hcard{
+  background:#fff;border:1px solid var(--gray2);border-radius:10px;
+  overflow:hidden;display:grid;grid-template-columns:195px 1fr 168px;
+  transition:box-shadow .2s,transform .15s;cursor:pointer;
+}
+.hcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-1px)}
+
+.hcard-img{
+  height:138px;position:relative;
+  background:linear-gradient(135deg,#E8EDF4,#CDD4E0);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+.hcard-img svg{width:138px;height:auto}
+.hc-badge-vis{
+  position:absolute;bottom:6px;left:6px;
+  background:#fff;color:var(--green);border:1px solid var(--green);
+  font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:3px;
+}
+.hc-badge-new{
+  position:absolute;top:6px;left:6px;
+  background:var(--red);color:#fff;
+  font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:3px;
+}
+.hc-heart{
+  position:absolute;top:6px;right:6px;
+  width:26px;height:26px;border-radius:50%;
+  background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:var(--gray3);transition:color .15s;cursor:pointer;
+}
+.hc-heart:hover{color:var(--red)}
+.hc-wpp{
+  position:absolute;bottom:6px;right:6px;
+  background:#1FAF38;color:#fff;font-size:9px;font-weight:700;
+  padding:2px 7px;border-radius:3px;
+}
+
+.hcard-body{
+  padding:12px 14px;display:flex;flex-direction:column;justify-content:space-between;
+}
+.hc-title{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:2px;line-height:1.25}
+.hc-sub{font-size:11.5px;color:var(--gray4);margin-bottom:7px}
+.hc-specs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}
+.spec{font-size:10px;font-weight:600;color:var(--gray5);background:var(--gray1);border-radius:3px;padding:2px 6px}
+.hc-desc{font-size:11.5px;color:var(--gray4);line-height:1.5;margin-bottom:6px}
+.hc-seller{font-size:11px;color:var(--gray4);display:flex;align-items:center;gap:4px}
+.seller-ok{color:var(--green);font-weight:600}
+.hc-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+.htag{font-size:9.5px;font-weight:600;background:var(--green-l);color:var(--green);border-radius:3px;padding:1px 5px}
+.htag-r{background:var(--red-l);color:var(--red)}
+
+.hcard-right{
+  padding:12px;display:flex;flex-direction:column;
+  justify-content:space-between;border-left:1px solid var(--gray2);
+}
+.hc-price-lbl{font-size:10px;color:var(--gray4);font-weight:500}
+.hc-price{font-size:19px;font-weight:900;color:var(--navy);line-height:1.1;margin-top:1px}
+.hc-price-sub{font-size:10.5px;color:var(--gray4);margin-top:3px;line-height:1.4}
+.hc-loc{font-size:11px;color:var(--gray4);margin-top:4px}
+.hc-btns{display:flex;flex-direction:column;gap:5px}
+.hbtn1{background:var(--red);color:#fff;border-radius:6px;padding:7px 0;font-size:11.5px;font-weight:700;text-align:center;transition:background .15s}
+.hbtn1:hover{background:var(--red-d)}
+.hbtn2{background:#1FAF38;color:#fff;border-radius:6px;padding:6px 0;font-size:11.5px;font-weight:700;text-align:center}
+.hbtn3{border:1px solid var(--gray2);color:var(--gray5);border-radius:6px;padding:6px 0;font-size:11.5px;text-align:center;background:#fff;transition:all .15s}
+.hbtn3:hover{border-color:var(--red);color:var(--red)}
+
+/* ── SEÇÕES ── */
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sec-title{font-size:17px;font-weight:800;color:var(--navy);letter-spacing:-.3px}
+.sec-title span{color:var(--red)}
+.sec-link{font-size:12.5px;font-weight:600;color:var(--red)}.sec-link:hover{text-decoration:underline}
+.sec-wrap{max-width:1180px;margin:0 auto;padding:26px 24px}
+
+/* ── GRID 4 CARDS ── */
+.cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.vcard{background:#fff;border:1px solid var(--gray2);border-radius:9px;overflow:hidden;cursor:pointer;transition:all .2s}
+.vcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.vcard-img{
+  height:145px;position:relative;
+  background:linear-gradient(135deg,#E8EDF4,#CDD4E0);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+.vcard-img svg{width:115px;height:auto}
+.vcard-hrt{
+  position:absolute;top:6px;right:6px;
+  width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.9);
+  display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gray3);cursor:pointer;
+}
+.vcard-hrt:hover{color:var(--red)}
+.vcard-body{padding:10px}
+.vcard-title{font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vcard-sub{font-size:11px;color:var(--gray4);margin-bottom:6px}
+.vcard-specs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:7px}
+.vcard-foot{display:flex;align-items:flex-end;justify-content:space-between}
+.vcard-price{font-size:15px;font-weight:900;color:var(--navy);line-height:1}
+.vcard-price small{font-size:10px;color:var(--gray4);font-weight:400;display:block}
+.vcard-btn{background:var(--red);color:#fff;border-radius:5px;padding:5px 10px;font-size:11px;font-weight:700;transition:background .15s}
+.vcard-btn:hover{background:var(--red-d)}
+
+/* ── COMO ANUNCIAR (OLX MODE) ── */
+.como-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.como-step{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.como-num{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--red);color:#fff;font-size:15px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.como-title{font-size:13px;font-weight:700;color:var(--navy)}
+.como-desc{font-size:12px;color:var(--gray4);line-height:1.6}
+
+/* ── BANNER ANUNCIAR ── */
+.anunciar-banner{
+  background:linear-gradient(135deg,var(--red) 0%,var(--red-d) 100%);
+  border-radius:12px;padding:28px 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  position:relative;overflow:hidden;
+}
+.anunciar-banner::before{
+  content:'';position:absolute;right:-40px;top:-40px;
+  width:220px;height:220px;border-radius:50%;
+  background:rgba(255,255,255,.06);
+}
+.anunciar-banner::after{
+  content:'';position:absolute;right:60px;bottom:-60px;
+  width:160px;height:160px;border-radius:50%;
+  background:rgba(255,255,255,.04);
+}
+.ab-left h2{font-size:22px;font-weight:900;color:#fff;margin-bottom:5px;letter-spacing:-.3px}
+.ab-left p{font-size:13px;color:rgba(255,255,255,.75)}
+.ab-btns{display:flex;gap:10px;flex-shrink:0;position:relative;z-index:1}
+.ab-btn-pri{
+  background:#fff;color:var(--red);border-radius:7px;
+  padding:10px 22px;font-size:14px;font-weight:800;transition:all .15s;
+}
+.ab-btn-pri:hover{background:rgba(255,255,255,.92);transform:translateY(-1px)}
+.ab-btn-sec{
+  background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4);
+  border-radius:7px;padding:10px 20px;font-size:14px;font-weight:700;transition:all .15s;
+}
+.ab-btn-sec:hover{background:rgba(255,255,255,.1)}
+
+/* ── MARCAS ── */
+.brands{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.brand{border:1px solid var(--gray2);border-radius:7px;padding:8px 16px;font-size:12px;font-weight:700;color:var(--gray5);cursor:pointer;background:#fff;transition:all .15s}
+.brand:hover{border-color:var(--red);color:var(--red)}
+
+/* ── NEWS ── */
+.news-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ncard{background:#fff;border:1px solid var(--gray2);border-radius:9px;overflow:hidden;cursor:pointer;transition:box-shadow .15s}
+.ncard:hover{box-shadow:var(--shadow)}
+.ncard-img{height:96px;display:flex;align-items:center;justify-content:center;position:relative}
+.ncard-body{padding:10px}
+.ntag{font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
+.ntitle{font-size:12px;font-weight:700;color:var(--navy);line-height:1.4}
+.ndate{font-size:11px;color:var(--gray4);margin-top:5px}
+
+/* ── SEGURANÇA (reforçar confiança) ── */
+.trust-bar{
+  background:var(--gray1);border-top:1px solid var(--gray2);border-bottom:1px solid var(--gray2);
+  padding:14px 24px;
+}
+.trust-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:8px}
+.trust-item svg{flex-shrink:0;opacity:.6}
+.trust-item span{font-size:12px;font-weight:600;color:var(--gray5)}
+
+/* ── FOOTER ── */
+footer{background:#060E18;padding:36px 24px 18px}
+.foot-inner{max-width:1180px;margin:0 auto}
+.foot-top{display:grid;grid-template-columns:2.1fr 1fr 1fr 1fr 1fr;gap:28px;margin-bottom:28px}
+.fl .logo{margin-bottom:10px;display:flex;align-items:baseline}
+.fl p{color:#3A4A5A;font-size:12px;line-height:1.7;max-width:200px;margin-bottom:12px}
+.ft-soc{display:flex;gap:6px}
+.ft-soc a{
+  width:30px;height:30px;border-radius:6px;background:rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:center;transition:background .15s;
+}
+.ft-soc a:hover{background:var(--red)}
+.ft-soc a svg{width:14px;height:14px;fill:#4A5568;transition:fill .15s}
+.ft-soc a:hover svg{fill:#fff}
+.fc h5{font-size:10px;font-weight:700;color:#3A4A5A;text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px}
+.fc a{display:block;color:#3A4A5A;font-size:12px;margin-bottom:5px;transition:color .15s}
+.fc a:hover{color:#6A7A8A}
+.foot-bot{
+  border-top:1px solid rgba(255,255,255,.05);padding-top:16px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.foot-bot p{font-size:11px;color:#1E2A38}
+.foot-bgs{display:flex;gap:6px}
+.foot-bg{border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:2px 8px;font-size:10px;color:#1E2A38}
+
+/* ── VER MAIS ── */
+.ver-mais{display:flex;justify-content:center;margin-top:16px}
+.ver-mais button{
+  border:1.5px solid var(--red);color:var(--red);background:#fff;
+  border-radius:7px;padding:9px 28px;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s;
+}
+.ver-mais button:hover{background:var(--red-l)}
+.divider{height:1px;background:var(--gray2)}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tb-l">
+    <a href="#">Anuncie grátis</a>
+    <a href="#">Revendas</a>
+    <a href="#">Financiamento</a>
+    <a href="#">Notícias</a>
+    <a href="#">Tabela de Preços</a>
+  </div>
+  <div class="tb-r">
+    <a href="#">📱 App — em breve</a>
+    <a href="#">Entrar</a>
+    <a href="#">Cadastrar</a>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="#" class="logo">
+    <span class="logo-p1">Pesados</span><span class="logo-p2">Motors</span>
+    <span class="logo-tag">beta</span>
+  </a>
+  <div class="nav-sb">
+    <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="#767E8C" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><path d="M15 15l3.5 3.5"/></svg>
+    <input placeholder="Buscar caminhão, marca, modelo…">
+    <button class="nav-sb-btn">Buscar</button>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="act">Comprar</a>
+    <a href="#">Vender</a>
+    <a href="#">Implementos</a>
+    <a href="#">Ônibus</a>
+    <a href="#">Notícias</a>
+  </div>
+  <div class="nav-acts">
+    <button class="btn-sec">Anunciar grátis</button>
+    <button class="btn-pri">Entrar</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-accent"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🚛 O maior marketplace de pesados do Brasil</div>
+    <h1 class="hero-title">
+      Encontre o veículo pesado<br>
+      <span class="hl">certo pra você</span>
+    </h1>
+    <p class="hero-sub">
+      <b>+400.000</b> anúncios · <b>17.000+</b> revendas parceiras ·
+      Anúncio gratuito para pessoa física
+    </p>
+    <div class="sbox">
+      <div class="stabs">
+        <button class="stab act" onclick="setTab(this)">Usados e Seminovos</button>
+        <button class="stab" onclick="setTab(this)">0 km</button>
+        <button class="stab" onclick="setTab(this)">Implementos</button>
+        <button class="stab" onclick="setTab(this)">Ônibus</button>
+      </div>
+      <div class="srow">
+        <div class="sf">
+          <span class="sf-lbl">Tipo de veículo</span>
+          <select>
+            <option>Todos os tipos</option>
+            <option>Cavalo Mecânico</option>
+            <option>Truck 6×2</option>
+            <option>Truck 6×4</option>
+            <option>Toco 4×2</option>
+            <option>Bitruck 8×4</option>
+            <option>VUC / Leve</option>
+          </select>
+        </div>
+        <div class="sf">
+          <span class="sf-lbl">Marca</span>
+          <select>
+            <option>Todas as marcas</option>
+            <option>Volvo</option>
+            <option>Mercedes-Benz</option>
+            <option>Scania</option>
+            <option>VW Caminhões</option>
+            <option>DAF</option>
+            <option>Iveco</option>
+            <option>Ford Cargo</option>
+            <option>MAN</option>
+          </select>
+        </div>
+        <div class="sf">
+          <span class="sf-lbl">Modelo</span>
+          <input placeholder="Ex: FH 540, Actros…">
+        </div>
+        <div class="sf">
+          <span class="sf-lbl">Estado</span>
+          <select>
+            <option>Todo Brasil</option>
+            <option>São Paulo</option>
+            <option>Minas Gerais</option>
+            <option>Paraná</option>
+            <option>Rio Grande do Sul</option>
+            <option>Mato Grosso</option>
+            <option>Goiás</option>
+            <option>Santa Catarina</option>
+          </select>
+        </div>
+        <button class="btn-search">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><path d="M15 15l3.5 3.5"/></svg>
+          Buscar
+        </button>
+      </div>
+      <div class="se">
+        <span class="se-lbl">Populares:</span>
+        <span class="se-pill">Volvo FH 540</span>
+        <span class="se-pill">Scania R 450</span>
+        <span class="se-pill">MB Actros 2553</span>
+        <span class="se-pill">Graneleiro Randon</span>
+        <span class="se-pill">Bitrem</span>
+        <a href="#" class="se-avancada">Filtros avançados →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIAS -->
+<div class="cat-wrap">
+  <div class="cat-inner">
+    <div class="cat-row">
+      <div class="cat-item act" onclick="setCat(this)">
+        <div class="cat-ico">
+          <svg width="24" viewBox="0 0 48 28" fill="none">
+            <rect x="1" y="7" width="30" height="17" rx="2" fill="#C5C8CE"/>
+            <rect x="1" y="7" width="16" height="11" rx="1" fill="#8B97A8"/>
+            <rect x="31" y="12" width="16" height="12" rx="1" fill="#A8ADB8"/>
+            <circle cx="9" cy="26" r="4" fill="#3A4250"/><circle cx="9" cy="26" r="2" fill="#767E8C"/>
+            <circle cx="38" cy="26" r="4" fill="#3A4250"/><circle cx="38" cy="26" r="2" fill="#767E8C"/>
+          </svg>
+        </div>
+        <span class="cat-nm">Cavalo</span>
+        <span class="cat-qt">48.200</span>
+      </div>
+      <div class="cat-item" onclick="setCat(this)">
+        <div class="cat-ico">
+          <svg width="24" viewBox="0 0 48 28" fill="none">
+            <rect x="1" y="5" width="46" height="19" rx="2" fill="#C5C8CE"/>
+            <rect x="1" y="5" width="14" height="11" rx="1" fill="#8B97A8"/>
+            <circle cx="9" cy="26" r="4" fill="#3A4250"/><circle cx="9" cy="26" r="2" fill="#767E8C"/>
+            <circle cx="24" cy="26" r="4" fill="#3A4250"/><circle cx="24" cy="26" r="2" fill="#767E8C"/>
+            <circle cx="38" cy="26" r="4" fill="#3A4250"/><circle cx="38" cy="26" r="2" fill="#767E8C"/>
+          </svg>
+        </div>
+        <span class="cat-nm">Truck</span>
+        <span class="cat-qt">73.500</span>
+      </div>
+      <div class="cat-item" onclick="setCat(this)">
+        <div class="cat-ico">
+          <svg width="24" viewBox="0 0 48 28" fill="none">
+            <rect x="1" y="6" width="46" height="18" rx="2" fill="#D0D4DB"/>
+            <rect x="1" y="6" width="12" height="10" rx="1" fill="#8B97A8"/>
+            <circle cx="10" cy="26" r="4" fill="#3A4250"/><circle cx="10" cy="26" r="2" fill="#767E8C"/>
+            <circle cx="28" cy="26" r="4" fill="#3A4250"/><circle cx="28" cy="26" r="2" fill="#767E8C"/>
+          </svg>
+        </div>
+        <span class="cat-nm">Toco</span>
+        <span class="cat-qt">51.000</span>
+      </div>
+      <div class="cat-item" onclick="setCat(this)">
+        <div class="cat-ico">
+          <svg width="24" viewBox="0 0 48 28" fill="none">
+            <rect x="18" y="8" width="29" height="16" rx="2" fill="#C5C8CE"/>
+            <rect x="1" y="12" width="17" height="12" rx="1" fill="#A8ADB8"/>
+            <circle cx="9" cy="26" r="4" fill="#3A4250"/><circle cx="9" cy="26" r="2" fill="#767E8C"/>
+            <circle cx="27" cy="26" r="4" fill="#3A4250"/><circle cx="27" cy="26" r="2" fill="#767E8C"/>
+            <circle cx="40" cy="26" r="4" fill="#3A4250"/><circle cx="40" cy="26" r="2" fill="#767E8C"/>
+          </svg>
+        </div>
+        <span class="cat-nm">Graneleiro</span>
+        <span class="cat-qt">22.100</span>
+      </div>
+      <div class="cat-item" onclick="setCat(this)">
+        <div class="cat-ico">
+          <svg width="24" viewBox="0 0 48 28" fill="none">
+            <rect x="17" y="7" width="30" height="17" rx="2" fill="#B0BEC5"/>
+            <rect x="1" y="12" width="16" height="12" rx="1" fill="#A8ADB8"/>
+            <rect x="19" y="9" width="26" height="13" rx="1" fill="#CFD8DC"/>
+            <circle cx="9" cy="26" r="4" fill="#3A4250"/><circle cx="9" cy="26" r="2" fill="#767E8C"/>
+            <circle cx="28" cy="26" r="4" fill="#3A4250"/><circle cx="28" cy="26" r="2" fill="#767E8C"/>
+            <circle cx="40" cy="26" r="4" fill="#3A4250"/><circle cx="40" cy="26" r="2" fill="#767E8C"/>
+          </svg>
+        </div>
+        <span class="cat-nm">Baú / Sider</span>
+        <span class="cat-qt">31.400</span>
+      </div>
+      <div class="cat-item" onclick="setCat(this)">
+        <div class="cat-ico">
+          <svg width="24" viewBox="0 0 48 28" fill="none">
+            <ellipse cx="32" cy="18" rx="14" ry="10" fill="#B0BEC5"/>
+            <rect x="1" y="12" width="18" height="12" rx="1" fill="#A8ADB8"/>
+            <circle cx="9" cy="26" r="4" fill="#3A4250"/><circle cx="9" cy="26" r="2" fill="#767E8C"/>
+            <circle cx="38" cy="26" r="4" fill="#3A4250"/><circle cx="38" cy="26" r="2" fill="#767E8C"/>
+          </svg>
+        </div>
+        <span class="cat-nm">Tanque</span>
+        <span class="cat-qt">9.400</span>
+      </div>
+      <div class="cat-item" onclick="setCat(this)">
+        <div class="cat-ico">
+          <svg width="24" viewBox="0 0 48 28" fill="none">
+            <rect x="1" y="6" width="46" height="18" rx="3" fill="#B0C4D8"/>
+            <rect x="1" y="6" width="46" height="9" rx="2" fill="#8FAABF"/>
+            <rect x="3" y="8" width="6" height="5" rx="1" fill="#E3EEF7"/>
+            <rect x="11" y="8" width="6" height="5" rx="1" fill="#E3EEF7"/>
+            <rect x="19" y="8" width="6" height="5" rx="1" fill="#E3EEF7"/>
+            <circle cx="10" cy="26" r="4" fill="#3A4250"/><circle cx="10" cy="26" r="2" fill="#767E8C"/>
+            <circle cx="38" cy="26" r="4" fill="#3A4250"/><circle cx="38" cy="26" r="2" fill="#767E8C"/>
+          </svg>
+        </div>
+        <span class="cat-nm">Ônibus</span>
+        <span class="cat-qt">12.800</span>
+      </div>
+      <div class="cat-item" onclick="setCat(this)">
+        <div class="cat-ico">
+          <svg width="24" viewBox="0 0 48 28" fill="none">
+            <rect x="17" y="7" width="30" height="17" rx="2" fill="#C5C8CE"/>
+            <rect x="1" y="12" width="16" height="12" rx="1" fill="#A8ADB8"/>
+            <path d="M17 10l-5-4h10" stroke="#8B97A8" stroke-width="1.2" fill="none"/>
+            <circle cx="9" cy="26" r="4" fill="#3A4250"/><circle cx="9" cy="26" r="2" fill="#767E8C"/>
+            <circle cx="27" cy="26" r="4" fill="#3A4250"/><circle cx="27" cy="26" r="2" fill="#767E8C"/>
+            <circle cx="40" cy="26" r="4" fill="#3A4250"/><circle cx="40" cy="26" r="2" fill="#767E8C"/>
+          </svg>
+        </div>
+        <span class="cat-nm">Basculante</span>
+        <span class="cat-qt">14.200</span>
+      </div>
+      <div class="cat-item" onclick="setCat(this)">
+        <div class="cat-ico">
+          <svg width="24" viewBox="0 0 48 28" fill="none">
+            <rect x="1" y="7" width="46" height="17" rx="2" fill="#C5C8CE"/>
+            <rect x="1" y="7" width="12" height="10" rx="1" fill="#8B97A8"/>
+            <circle cx="10" cy="26" r="4" fill="#3A4250"/><circle cx="10" cy="26" r="2" fill="#767E8C"/>
+            <circle cx="22" cy="26" r="4" fill="#3A4250"/><circle cx="22" cy="26" r="2" fill="#767E8C"/>
+            <circle cx="36" cy="26" r="4" fill="#3A4250"/><circle cx="36" cy="26" r="2" fill="#767E8C"/>
+          </svg>
+        </div>
+        <span class="cat-nm">Frigorífico</span>
+        <span class="cat-qt">18.700</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WRAP PRINCIPAL -->
+<div class="wrap">
+
+  <!-- BANNER FEIRÃO (temporário, editorial) -->
+  <div class="feirao">
+    <div>
+      <div class="fei-tag">📢 Destaque</div>
+      <div class="fei-title">Ofertas da <span>semana</span></div>
+      <div class="fei-sub">Caminhões com valores abaixo da tabela · Atualizado diariamente</div>
+    </div>
+    <div class="fei-stats">
+      <div class="fs"><span class="fs-n">400k+</span><span class="fs-l">Anúncios</span></div>
+      <div class="fs"><span class="fs-n">17k+</span><span class="fs-l">Revendas</span></div>
+      <div class="fs"><span class="fs-n">27 UF</span><span class="fs-l">Estados</span></div>
+    </div>
+    <button class="fei-btn">Ver ofertas →</button>
+  </div>
+
+  <!-- AVISO MODO INICIAL -->
+  <div class="aviso-beta">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#767E8C" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+    <p>
+      <strong>Como funciona o PesadosMotors:</strong>
+      Conectamos você diretamente ao anunciante. Para fechar negócio, entre em contato via WhatsApp ou telefone — sem intermediários, sem taxas de transação.
+    </p>
+  </div>
+
+  <!-- RESULTADOS + SIDEBAR -->
+  <div class="res-wrap">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sb-hd">
+        <h3>Filtrar</h3>
+        <a href="#" class="sb-clear">Limpar</a>
+      </div>
+      <div class="sb-sec">
+        <div class="sb-ttl">Tipo de veículo</div>
+        <select class="sb-sel">
+          <option>Todos</option>
+          <option>Cavalo mecânico</option>
+          <option>Truck (6×2 / 6×4)</option>
+          <option>Toco (4×2)</option>
+          <option>Bitruck (8×4)</option>
+        </select>
+      </div>
+      <div class="sb-sec">
+        <div class="sb-ttl">Marca</div>
+        <label class="sb-chk"><input type="checkbox" checked><label>Volvo</label><span class="ct">8.240</span></label>
+        <label class="sb-chk"><input type="checkbox"><label>Mercedes-Benz</label><span class="ct">7.100</span></label>
+        <label class="sb-chk"><input type="checkbox"><label>Scania</label><span class="ct">5.880</span></label>
+        <label class="sb-chk"><input type="checkbox"><label>VW Caminhões</label><span class="ct">4.200</span></label>
+        <label class="sb-chk"><input type="checkbox"><label>DAF</label><span class="ct">1.940</span></label>
+        <label class="sb-chk"><input type="checkbox"><label>Iveco</label><span class="ct">1.320</span></label>
+        <a class="sb-mais">+ Ver mais marcas</a>
+      </div>
+      <div class="sb-sec">
+        <div class="sb-ttl">Faixa de preço (R$)</div>
+        <div class="sb-range">
+          <input placeholder="Mínimo">
+          <input placeholder="Máximo">
+        </div>
+      </div>
+      <div class="sb-sec">
+        <div class="sb-ttl">Ano de fabricação</div>
+        <div class="sb-range">
+          <input placeholder="De" value="2016">
+          <input placeholder="Até" value="2025">
+        </div>
+      </div>
+      <div class="sb-sec">
+        <div class="sb-ttl">Quilometragem</div>
+        <select class="sb-sel">
+          <option>Qualquer km</option>
+          <option>Até 200.000 km</option>
+          <option>Até 400.000 km</option>
+          <option>Até 600.000 km</option>
+          <option>Acima de 600.000 km</option>
+        </select>
+      </div>
+      <div class="sb-sec">
+        <div class="sb-ttl">Potência (cv)</div>
+        <div class="sb-chips">
+          <span class="sb-chip">Até 300</span>
+          <span class="sb-chip">300–450</span>
+          <span class="sb-chip act">450–540</span>
+          <span class="sb-chip">+540</span>
+        </div>
+      </div>
+      <div class="sb-sec">
+        <div class="sb-ttl">Tração</div>
+        <div class="sb-chips">
+          <span class="sb-chip">4×2</span>
+          <span class="sb-chip act">6×2</span>
+          <span class="sb-chip">6×4</span>
+          <span class="sb-chip">8×4</span>
+        </div>
+      </div>
+      <div class="sb-sec">
+        <div class="sb-ttl">Câmbio</div>
+        <label class="sb-chk"><input type="checkbox" checked><label>Automático</label></label>
+        <label class="sb-chk"><input type="checkbox"><label>Manual</label></label>
+        <label class="sb-chk"><input type="checkbox"><label>Automatizado</label></label>
+      </div>
+      <div class="sb-sec">
+        <div class="sb-ttl">Outros</div>
+        <label class="sb-chk"><input type="checkbox" checked><label>Aceita troca</label></label>
+        <label class="sb-chk"><input type="checkbox"><label>Único dono</label></label>
+        <label class="sb-chk"><input type="checkbox"><label>Com nota fiscal</label></label>
+        <label class="sb-chk"><input type="checkbox"><label>Atende via WhatsApp</label></label>
+        <div class="sb-apply">Aplicar filtros</div>
+      </div>
+    </aside>
+
+    <!-- RESULTADOS -->
+    <div>
+      <div class="bc">
+        <a href="#">Início</a><span class="bc-sep">/</span>
+        <a href="#">Caminhões</a><span class="bc-sep">/</span>
+        <span>Volvo · 450–540cv</span>
+      </div>
+      <div class="atags">
+        <span class="atag">Volvo <button onclick="this.parentElement.remove()">×</button></span>
+        <span class="atag">450–540 cv <button onclick="this.parentElement.remove()">×</button></span>
+        <span class="atag">Automático <button onclick="this.parentElement.remove()">×</button></span>
+      </div>
+      <div class="res-hd">
+        <div class="res-cnt"><span>8.240</span> caminhões encontrados</div>
+        <select class="res-sort">
+          <option>Mais relevantes</option>
+          <option>Menor preço</option>
+          <option>Maior preço</option>
+          <option>Mais recentes</option>
+          <option>Menor quilometragem</option>
+        </select>
+      </div>
+
+      <!-- AVISO FINANCIAMENTO (links externos) -->
+      <div class="fin-aviso">
+        <div class="fi">💳</div>
+        <div>
+          <h4>Precisa de financiamento para este caminhão?</h4>
+          <p>Simule diretamente nos bancos parceiros. Clique no link e você será redirecionado ao simulador oficial da instituição.</p>
+        </div>
+        <div class="fin-aviso-btns">
+          <a href="https://www.bb.com.br/pbb/pagina-inicial/agronegocios/produtos-e-servicos/credito/credito-rural/finame-e-finame-agricola#/" target="_blank" class="fin-link">🏦 BB FINAME →</a>
+          <a href="https://www.santander.com.br/financiamento-de-veiculos" target="_blank" class="fin-link">🏦 Santander →</a>
+          <a href="https://www.itau.com.br/emprestimos-financiamentos/veiculo/" target="_blank" class="fin-link">🏦 Itaú →</a>
+        </div>
+      </div>
+
+      <!-- CARDS -->
+      <div class="cards-list">
+
+        <div class="hcard">
+          <div class="hcard-img">
+            <svg viewBox="0 0 200 90" fill="none" width="140">
+              <rect x="8" y="28" width="184" height="50" rx="4" fill="#1A375E" opacity=".12"/>
+              <rect x="8" y="28" width="62" height="37" rx="3" fill="#1A375E" opacity=".35"/>
+              <rect x="70" y="33" width="122" height="45" rx="3" fill="#1A375E" opacity=".2"/>
+              <rect x="10" y="30" width="58" height="18" rx="2" fill="#CC1B1B" opacity=".8"/>
+              <rect x="14" y="33" width="18" height="10" rx="1" fill="#fff" opacity=".35"/>
+              <circle cx="38" cy="82" r="10" fill="#1A2332"/><circle cx="38" cy="82" r="5" fill="#3A4250"/>
+              <circle cx="148" cy="82" r="10" fill="#1A2332"/><circle cx="148" cy="82" r="5" fill="#3A4250"/>
+            </svg>
+            <div class="hc-badge-vis">✓ Único dono</div>
+            <div class="hc-heart" onclick="toggleHeart(this)">♡</div>
+            <div class="hc-wpp">WhatsApp</div>
+          </div>
+          <div class="hcard-body">
+            <div>
+              <div class="hc-title">Volvo FH 540 6×4 Globetrotter XL 2022</div>
+              <div class="hc-sub">São Paulo, SP · 280.000 km · Diesel · I-Shift automático</div>
+              <div class="hc-specs">
+                <span class="spec">540 cv</span><span class="spec">I-Shift 12v</span>
+                <span class="spec">6×4</span><span class="spec">Leito casal</span><span class="spec">Euro 6</span>
+              </div>
+              <div class="hc-desc">Motor D13K 540cv Euro 6. Tacógrafo digital (km verificável). Revisão em concessionária Volvo. Único dono desde 0km.</div>
+            </div>
+            <div>
+              <div class="hc-seller">🏢 <strong>Alfa Caminhões SP</strong> · Revenda · <span class="seller-ok">✓ CNPJ verificado</span></div>
+              <div class="hc-tags">
+                <span class="htag">Único dono</span>
+                <span class="htag">NF disponível</span>
+                <span class="htag">Aceita troca</span>
+              </div>
+            </div>
+          </div>
+          <div class="hcard-right">
+            <div>
+              <div class="hc-price-lbl">Preço anunciado</div>
+              <div class="hc-price">R$ 580.000</div>
+              <div class="hc-price-sub">Valor sujeito a negociação<br>Financiamento por conta do comprador</div>
+              <div class="hc-loc">📍 São Paulo, SP</div>
+            </div>
+            <div class="hc-btns">
+              <div class="hbtn1">📱 Ver contato</div>
+              <div class="hbtn2">💬 WhatsApp</div>
+              <div class="hbtn3">🔍 Ver detalhes</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hcard">
+          <div class="hcard-img" style="background:linear-gradient(135deg,#DDE8D4,#C2D4B8)">
+            <svg viewBox="0 0 200 90" fill="none" width="140">
+              <rect x="8" y="30" width="184" height="48" rx="4" fill="#1A4D2E" opacity=".12"/>
+              <rect x="8" y="30" width="58" height="34" rx="3" fill="#1A4D2E" opacity=".32"/>
+              <rect x="66" y="34" width="126" height="44" rx="3" fill="#1A4D2E" opacity=".18"/>
+              <rect x="10" y="32" width="54" height="17" rx="2" fill="#2D7D32" opacity=".7"/>
+              <rect x="14" y="35" width="14" height="10" rx="1" fill="#fff" opacity=".35"/>
+              <circle cx="36" cy="82" r="10" fill="#1A2332"/><circle cx="36" cy="82" r="5" fill="#3A4250"/>
+              <circle cx="150" cy="82" r="10" fill="#1A2332"/><circle cx="150" cy="82" r="5" fill="#3A4250"/>
+            </svg>
+            <div class="hc-heart" onclick="toggleHeart(this)">♡</div>
+            <div class="hc-wpp">WhatsApp</div>
+          </div>
+          <div class="hcard-body">
+            <div>
+              <div class="hc-title">Scania R 450 A4×2 Highline 2021</div>
+              <div class="hc-sub">Curitiba, PR · 390.000 km · Diesel · Opticruise</div>
+              <div class="hc-specs">
+                <span class="spec">450 cv</span><span class="spec">Opticruise</span>
+                <span class="spec">4×2</span><span class="spec">Highline</span>
+              </div>
+              <div class="hc-desc">Manutenção full na rede Scania. Histórico completo de serviços. Aceita troca por veículo de menor valor + diferença.</div>
+            </div>
+            <div>
+              <div class="hc-seller">👤 <strong>Transportes Neves Ltda.</strong> · PJ</div>
+              <div class="hc-tags"><span class="htag">Aceita troca</span><span class="htag">Histórico completo</span></div>
+            </div>
+          </div>
+          <div class="hcard-right">
+            <div>
+              <div class="hc-price-lbl">Preço anunciado</div>
+              <div class="hc-price">R$ 410.000</div>
+              <div class="hc-price-sub">Aceita proposta</div>
+              <div class="hc-loc">📍 Curitiba, PR</div>
+            </div>
+            <div class="hc-btns">
+              <div class="hbtn1">📱 Ver contato</div>
+              <div class="hbtn2">💬 WhatsApp</div>
+              <div class="hbtn3">🔍 Ver detalhes</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hcard">
+          <div class="hcard-img" style="background:linear-gradient(135deg,#E8E0D4,#D4C8BC)">
+            <svg viewBox="0 0 200 90" fill="none" width="140">
+              <rect x="8" y="26" width="184" height="52" rx="4" fill="#4A3728" opacity=".12"/>
+              <rect x="8" y="26" width="60" height="40" rx="3" fill="#4A3728" opacity=".32"/>
+              <rect x="68" y="31" width="124" height="47" rx="3" fill="#4A3728" opacity=".18"/>
+              <rect x="10" y="28" width="56" height="17" rx="2" fill="#862B0D" opacity=".75"/>
+              <circle cx="36" cy="82" r="10" fill="#1A2332"/><circle cx="36" cy="82" r="5" fill="#3A4250"/>
+              <circle cx="97" cy="82" r="10" fill="#1A2332"/><circle cx="97" cy="82" r="5" fill="#3A4250"/>
+              <circle cx="152" cy="82" r="10" fill="#1A2332"/><circle cx="152" cy="82" r="5" fill="#3A4250"/>
+            </svg>
+            <div class="hc-heart" onclick="toggleHeart(this)">♡</div>
+          </div>
+          <div class="hcard-body">
+            <div>
+              <div class="hc-title">Mercedes-Benz Actros 2553 S 6×4 2020</div>
+              <div class="hc-sub">Goiânia, GO · 520.000 km · Diesel · PowerShift 3</div>
+              <div class="hc-specs">
+                <span class="spec">530 cv</span><span class="spec">PowerShift 3</span>
+                <span class="spec">6×4</span><span class="spec">StreamSpace</span>
+              </div>
+              <div class="hc-desc">Revisão concessionária MB em jan/26. Pneus novos (8 trocados). Documentação em dia. NF disponível.</div>
+            </div>
+            <div>
+              <div class="hc-seller">🏢 <strong>Revendas Cerrado GO</strong> · <span class="seller-ok">✓ CNPJ verificado</span></div>
+              <div class="hc-tags"><span class="htag">NF disponível</span><span class="htag">Pneus novos</span></div>
+            </div>
+          </div>
+          <div class="hcard-right">
+            <div>
+              <div class="hc-price-lbl">Preço anunciado</div>
+              <div class="hc-price">R$ 495.000</div>
+              <div class="hc-loc">📍 Goiânia, GO</div>
+            </div>
+            <div class="hc-btns">
+              <div class="hbtn1">📱 Ver contato</div>
+              <div class="hbtn2">💬 WhatsApp</div>
+              <div class="hbtn3">🔍 Ver detalhes</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hcard">
+          <div class="hcard-img" style="background:linear-gradient(135deg,#D4DCE8,#BBC4D4)">
+            <svg viewBox="0 0 200 90" fill="none" width="140">
+              <rect x="8" y="28" width="184" height="50" rx="4" fill="#1A2E4A" opacity=".12"/>
+              <rect x="8" y="28" width="60" height="36" rx="3" fill="#1A2E4A" opacity=".35"/>
+              <rect x="68" y="33" width="124" height="45" rx="3" fill="#1A2E4A" opacity=".18"/>
+              <rect x="10" y="30" width="56" height="17" rx="2" fill="#0D47A1" opacity=".65"/>
+              <rect x="14" y="33" width="14" height="10" rx="1" fill="#fff" opacity=".35"/>
+              <circle cx="38" cy="82" r="10" fill="#1A2332"/><circle cx="38" cy="82" r="5" fill="#3A4250"/>
+              <circle cx="150" cy="82" r="10" fill="#1A2332"/><circle cx="150" cy="82" r="5" fill="#3A4250"/>
+            </svg>
+            <div class="hc-badge-new">Novo no site</div>
+            <div class="hc-heart" onclick="toggleHeart(this)">♡</div>
+          </div>
+          <div class="hcard-body">
+            <div>
+              <div class="hc-title">DAF XF 480 FT Super Space 4×2 2023</div>
+              <div class="hc-sub">Londrina, PR · 180.000 km · Diesel · TraXon automático</div>
+              <div class="hc-specs">
+                <span class="spec">480 cv</span><span class="spec">TraXon 12v</span>
+                <span class="spec">4×2</span><span class="spec">Euro 6</span>
+              </div>
+              <div class="hc-desc">Seminovo em ótimo estado. Garantia de fábrica vigente até 2027. Único dono. IPVA 2026 quitado.</div>
+            </div>
+            <div>
+              <div class="hc-seller">🏢 <strong>Truck Center PR</strong> · <span class="seller-ok">✓ CNPJ verificado</span></div>
+              <div class="hc-tags"><span class="htag">Garantia vigente</span><span class="htag">Único dono</span></div>
+            </div>
+          </div>
+          <div class="hcard-right">
+            <div>
+              <div class="hc-price-lbl">Preço anunciado</div>
+              <div class="hc-price">R$ 620.000</div>
+              <div class="hc-price-sub">Aceita proposta</div>
+              <div class="hc-loc">📍 Londrina, PR</div>
+            </div>
+            <div class="hc-btns">
+              <div class="hbtn1">📱 Ver contato</div>
+              <div class="hbtn2">💬 WhatsApp</div>
+              <div class="hbtn3">🔍 Ver detalhes</div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /cards-list -->
+
+      <div class="ver-mais"><button>Ver mais resultados</button></div>
+    </div>
+  </div>
+</div><!-- /wrap -->
+
+<div class="divider"></div>
+
+<!-- DESTAQUES GRID -->
+<div class="sec-wrap">
+  <div class="sec-hd">
+    <h2 class="sec-title">Destaques da <span>semana</span></h2>
+    <a href="#" class="sec-link">Ver todos →</a>
+  </div>
+  <div class="cards-grid">
+    <div class="vcard">
+      <div class="vcard-img">
+        <svg viewBox="0 0 160 80" fill="none" width="110"><rect x="5" y="20" width="150" height="48" rx="3" fill="#1A375E" opacity=".15"/><rect x="5" y="20" width="52" height="34" rx="2" fill="#1A375E" opacity=".4"/><rect x="57" y="25" width="98" height="43" rx="2" fill="#1A375E" opacity=".2"/><rect x="7" y="22" width="48" height="15" rx="1" fill="#CC1B1B" opacity=".8"/><circle cx="30" cy="72" r="9" fill="#1A2332"/><circle cx="30" cy="72" r="4.5" fill="#3A4250"/><circle cx="130" cy="72" r="9" fill="#1A2332"/><circle cx="130" cy="72" r="4.5" fill="#3A4250"/></svg>
+        <div class="vcard-hrt" onclick="toggleHeart(this)">♡</div>
+      </div>
+      <div class="vcard-body">
+        <div class="vcard-title">Volvo FH 540 6×4 2022</div>
+        <div class="vcard-sub">São Paulo, SP · 280.000 km</div>
+        <div class="vcard-specs"><span class="spec">540cv</span><span class="spec">6×4</span><span class="spec">Auto</span></div>
+        <div class="vcard-foot"><div class="vcard-price"><small>R$</small>580.000</div><button class="vcard-btn">Contato</button></div>
+      </div>
+    </div>
+    <div class="vcard">
+      <div class="vcard-img" style="background:linear-gradient(135deg,#DDE8D4,#C2D4B8)">
+        <svg viewBox="0 0 160 80" fill="none" width="110"><rect x="5" y="22" width="150" height="46" rx="3" fill="#1A4D2E" opacity=".18"/><rect x="5" y="22" width="48" height="30" rx="2" fill="#1A4D2E" opacity=".4"/><rect x="53" y="27" width="102" height="41" rx="2" fill="#1A4D2E" opacity=".2"/><rect x="7" y="24" width="44" height="14" rx="1" fill="#2D7D32" opacity=".65"/><circle cx="29" cy="72" r="9" fill="#1A2332"/><circle cx="29" cy="72" r="4.5" fill="#3A4250"/><circle cx="128" cy="72" r="9" fill="#1A2332"/><circle cx="128" cy="72" r="4.5" fill="#3A4250"/></svg>
+        <div class="vcard-hrt" onclick="toggleHeart(this)">♡</div>
+      </div>
+      <div class="vcard-body">
+        <div class="vcard-title">Scania R 450 2021</div>
+        <div class="vcard-sub">Curitiba, PR · 390.000 km</div>
+        <div class="vcard-specs"><span class="spec">450cv</span><span class="spec">4×2</span></div>
+        <div class="vcard-foot"><div class="vcard-price"><small>R$</small>410.000</div><button class="vcard-btn">Contato</button></div>
+      </div>
+    </div>
+    <div class="vcard">
+      <div class="vcard-img" style="background:linear-gradient(135deg,#E8EDF0,#CDD4DA)">
+        <svg viewBox="0 0 160 80" fill="none" width="110"><rect x="55" y="16" width="100" height="52" rx="3" fill="#2E4D2E" opacity=".2"/><rect x="1" y="24" width="54" height="44" rx="2" fill="#2E4D2E" opacity=".28"/><circle cx="28" cy="72" r="9" fill="#1A2332"/><circle cx="28" cy="72" r="4.5" fill="#3A4250"/><circle cx="87" cy="72" r="9" fill="#1A2332"/><circle cx="87" cy="72" r="4.5" fill="#3A4250"/><circle cx="138" cy="72" r="9" fill="#1A2332"/><circle cx="138" cy="72" r="4.5" fill="#3A4250"/></svg>
+        <div class="vcard-hrt" onclick="toggleHeart(this)">♡</div>
+      </div>
+      <div class="vcard-body">
+        <div class="vcard-title">Graneleiro Randon 2020</div>
+        <div class="vcard-sub">Goiânia, GO · Tri-eixo</div>
+        <div class="vcard-specs"><span class="spec">88t PBTC</span><span class="spec">3 eixos</span></div>
+        <div class="vcard-foot"><div class="vcard-price"><small>R$</small>175.000</div><button class="vcard-btn">Contato</button></div>
+      </div>
+    </div>
+    <div class="vcard">
+      <div class="vcard-img" style="background:linear-gradient(135deg,#D4DCE8,#BBC4D4)">
+        <svg viewBox="0 0 160 80" fill="none" width="110"><rect x="5" y="22" width="150" height="46" rx="3" fill="#1A2E4A" opacity=".16"/><rect x="5" y="22" width="48" height="30" rx="2" fill="#1A2E4A" opacity=".38"/><rect x="53" y="27" width="102" height="41" rx="2" fill="#1A2E4A" opacity=".18"/><rect x="7" y="24" width="44" height="14" rx="1" fill="#0D47A1" opacity=".6"/><circle cx="29" cy="72" r="9" fill="#1A2332"/><circle cx="29" cy="72" r="4.5" fill="#3A4250"/><circle cx="128" cy="72" r="9" fill="#1A2332"/><circle cx="128" cy="72" r="4.5" fill="#3A4250"/></svg>
+        <div class="vcard-hrt" onclick="toggleHeart(this)">♡</div>
+      </div>
+      <div class="vcard-body">
+        <div class="vcard-title">DAF XF 480 FT 2023</div>
+        <div class="vcard-sub">Londrina, PR · 180.000 km</div>
+        <div class="vcard-specs"><span class="spec">480cv</span><span class="spec">4×2</span></div>
+        <div class="vcard-foot"><div class="vcard-price"><small>R$</small>620.000</div><button class="vcard-btn">Contato</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- COMO ANUNCIAR -->
+<div class="sec-wrap" style="background:var(--gray1)">
+  <div class="sec-hd">
+    <h2 class="sec-title">Como <span>anunciar grátis</span></h2>
+    <a href="#" class="sec-link">Publicar meu anúncio →</a>
+  </div>
+  <div class="como-grid">
+    <div class="como-step">
+      <div class="como-num">1</div>
+      <div class="como-title">Crie sua conta</div>
+      <div class="como-desc">Cadastre-se com CPF ou CNPJ. Rápido, gratuito e sem burocracia. PF pode anunciar até 3 veículos por mês gratuitamente.</div>
+    </div>
+    <div class="como-step">
+      <div class="como-num">2</div>
+      <div class="como-title">Publique seu veículo</div>
+      <div class="como-desc">Adicione fotos, dados técnicos (marca, modelo, km, ano, potência) e o preço pedido. Quanto mais detalhes, mais contatos.</div>
+    </div>
+    <div class="como-step">
+      <div class="como-num">3</div>
+      <div class="como-title">Receba contatos</div>
+      <div class="como-desc">Compradores entram em contato direto pelo WhatsApp ou telefone que você cadastrou. Você negocia diretamente, sem intermediários.</div>
+    </div>
+    <div class="como-step">
+      <div class="como-num">4</div>
+      <div class="como-title">Feche o negócio</div>
+      <div class="como-desc">A transação acontece entre você e o comprador. Recomendamos exigir CRLV, fazer vistoria e lavrar contrato de compra e venda antes de transferir.</div>
+    </div>
+  </div>
+</div>
+
+<!-- BANNER ANUNCIAR -->
+<div class="sec-wrap">
+  <div class="anunciar-banner">
+    <div class="ab-left">
+      <h2>Tem um caminhão pra vender?</h2>
+      <p>Anuncie grátis para pessoa física · Planos para revendas a partir de R$ 350/mês</p>
+    </div>
+    <div class="ab-btns">
+      <button class="ab-btn-pri">Anunciar agora — é grátis</button>
+      <button class="ab-btn-sec">Sou revenda → Ver planos</button>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- MARCAS -->
+<div class="sec-wrap">
+  <h2 class="sec-title" style="text-align:center;margin-bottom:16px">Buscar por <span>marca</span></h2>
+  <div class="brands">
+    <div class="brand">Volvo</div>
+    <div class="brand">Mercedes-Benz</div>
+    <div class="brand">Scania</div>
+    <div class="brand">VW Caminhões</div>
+    <div class="brand">DAF</div>
+    <div class="brand">Iveco</div>
+    <div class="brand">Ford Cargo</div>
+    <div class="brand">MAN</div>
+    <div class="brand">Randon</div>
+    <div class="brand">Facchini</div>
+    <div class="brand">Guerra</div>
+    <div class="brand">Librelato</div>
+    <div class="brand">Noma</div>
+    <div class="brand">Rodotrem</div>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#767E8C" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Anunciantes verificados por CNPJ</span>
+    </div>
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#767E8C" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+      <span>Anúncios reais, moderados pela equipe</span>
+    </div>
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#767E8C" stroke-width="1.8" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      <span>Contato direto · Sem intermediários</span>
+    </div>
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#767E8C" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      <span>Plataforma segura · LGPD</span>
+    </div>
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#767E8C" stroke-width="1.8" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+      <span>pesadosmotors.com.br · domínio registrado</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- NEWS -->
+<div class="sec-wrap">
+  <div class="sec-hd">
+    <h2 class="sec-title">Notícias do <span>setor</span></h2>
+    <a href="#" class="sec-link">Ver mais →</a>
+  </div>
+  <div class="news-grid">
+    <div class="ncard">
+      <div class="ncard-img" style="background:linear-gradient(135deg,#E8EDF4,#D0D8E4)">
+        <svg viewBox="0 0 60 40" width="44" fill="none"><path d="M5 32l10-14 10 7 12-16 12 12" stroke="#1A375E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="49" cy="10" r="4" fill="#CC1B1B" opacity=".7"/></svg>
+      </div>
+      <div class="ncard-body">
+        <div class="ntag">Mercado</div>
+        <div class="ntitle">Caminhões usados crescem 27,7% em 2025 — maior volume histórico</div>
+        <div class="ndate">14 abr 2026</div>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="ncard-img" style="background:linear-gradient(135deg,#EAF4E8,#C8D8C0)">
+        <svg viewBox="0 0 60 40" width="44" fill="none"><circle cx="30" cy="20" r="11" stroke="#1A4D2E" stroke-width="1.8"/><path d="M30 11v5M30 24v5M21 20h5M34 20h5" stroke="#1A4D2E" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <div class="ncard-body">
+        <div class="ntag">Tecnologia</div>
+        <div class="ntitle">Volvo lança FH Elétrico para longa distância no mercado brasileiro</div>
+        <div class="ndate">10 abr 2026</div>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="ncard-img" style="background:linear-gradient(135deg,#FFF0F0,#F5D8D8)">
+        <svg viewBox="0 0 60 40" width="44" fill="none"><rect x="8" y="8" width="44" height="26" rx="3" stroke="#CC1B1B" stroke-width="1.8"/><path d="M8 16h44" stroke="#CC1B1B" stroke-width="1.2"/><path d="M16 26h10m4 0h10" stroke="#CC1B1B" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="ncard-body">
+        <div class="ntag">Financiamento</div>
+        <div class="ntitle">FINAME BNDESm: taxa cai para 0,89% a.m. — como simular no banco</div>
+        <div class="ndate">8 abr 2026</div>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="ncard-img" style="background:linear-gradient(135deg,#E8F4EA,#C4DCC8)">
+        <svg viewBox="0 0 60 40" width="44" fill="none"><path d="M10 36 Q30 4 50 36" stroke="#2D7D32" stroke-width="2" fill="none"/><circle cx="30" cy="15" r="5" fill="#2D7D32" opacity=".35"/></svg>
+      </div>
+      <div class="ncard-body">
+        <div class="ntag">Agronegócio</div>
+        <div class="ntitle">Safra recorde 2026 impulsiona demanda por graneleiros no MT e GO</div>
+        <div class="ndate">5 abr 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div class="fl">
+        <div class="logo">
+          <span class="logo-p1" style="font-size:19px">Pesados</span>
+          <span class="logo-p2" style="font-size:19px">Motors</span>
+        </div>
+        <p>O maior marketplace de veículos pesados do Brasil. Compre e venda caminhões, implementos e ônibus com segurança.</p>
+        <div class="ft-soc">
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0016 2.5a4.48 4.48 0 00-4.48 4.48c0 .35.04.7.11 1.03A12.69 12.69 0 013 3.8a4.48 4.48 0 001.39 5.98 4.42 4.42 0 01-2.03-.55v.06A4.48 4.48 0 006 13.71a4.5 4.5 0 01-2 .08 4.48 4.48 0 004.19 3.12A9 9 0 012 18.54 12.73 12.73 0 008.29 20c7.55 0 11.68-6.25 11.68-11.67v-.53A8.36 8.36 0 0023 3z"/></svg></a>
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div class="fc">
+        <h5>Comprar</h5>
+        <a href="#">Caminhões usados</a>
+        <a href="#">Cavalos mecânicos</a>
+        <a href="#">Implementos</a>
+        <a href="#">Ônibus</a>
+        <a href="#">0 km</a>
+        <a href="#">Por estado</a>
+      </div>
+      <div class="fc">
+        <h5>Vender</h5>
+        <a href="#">Anunciar grátis (PF)</a>
+        <a href="#">Planos para revendas</a>
+        <a href="#">Como funciona</a>
+        <a href="#">Dicas de anúncio</a>
+      </div>
+      <div class="fc">
+        <h5>Financiamento</h5>
+        <a href="https://www.bb.com.br" target="_blank">BB FINAME ↗</a>
+        <a href="https://www.santander.com.br" target="_blank">Santander ↗</a>
+        <a href="https://www.itau.com.br" target="_blank">Itaú BBA ↗</a>
+        <a href="#">Como funciona o FINAME</a>
+        <a href="#">Guia de financiamento</a>
+      </div>
+      <div class="fc">
+        <h5>PesadosMotors</h5>
+        <a href="#">Sobre nós</a>
+        <a href="#">Revendas parceiras</a>
+        <a href="#">Notícias</a>
+        <a href="#">Contato</a>
+        <a href="#">Termos de uso</a>
+        <a href="#">Privacidade / LGPD</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <p>© 2026 PesadosMotors Ltda · CNPJ 00.000.000/0001-00 · São Paulo, SP · pesadosmotors.com.br</p>
+      <div class="foot-bgs">
+        <span class="foot-bg">SSL Seguro</span>
+        <span class="foot-bg">LGPD</span>
+        <span class="foot-bg">ANTT</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function setTab(el){document.querySelectorAll('.stab').forEach(t=>t.classList.remove('act'));el.classList.add('act')}
+function setCat(el){document.querySelectorAll('.cat-item').forEach(c=>c.classList.remove('act'));el.classList.add('act')}
+function toggleHeart(el){
+  const isLiked = el.textContent.trim()==='❤️';
+  el.textContent = isLiked ? '♡' : '❤️';
+  el.style.color = isLiked ? '' : '#CC1B1B';
+}
+document.querySelectorAll('.sb-chip').forEach(c=>{c.addEventListener('click',function(){this.classList.toggle('act')})});
+</script>
+</body>
+</html>
